@@ -5,6 +5,13 @@ This repo contains code for automatic certificate labeling - such as adding name
 ---
 
 
+# Run via app.py =>
+`uvicorn app:app --reload`
+
+### Starting uvicorn ->
+`uvicorn <filename_without_.py>:<FastAPI_instance>`
+
+# Run directly
 
 ## For pdf template =>
 
@@ -22,8 +29,7 @@ python main.py \
 
 ## For images template =>
 
-
-### Good command for central text ->
+Good command for central text ->
 
 `
 python main.py --template certificate.jpeg --names names.txt --outdir output --y 410 --box-h 120 --font "C:/Windows/Fonts/BRUSHSCI.TTF" --font-size 48

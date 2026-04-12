@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Certificate Editor</title>
+    </head>
+    <body>
+        <h1>This here is certificate editor</h1>
+        <h1> Upload Text File</h1>
+        <p style="border: 2px solid black; max-width:350px;">Ensure that the text file has following format -> <br>
+            Prathmesh Lagdive <br>
+            Vaibhav Aglave<br>
+            Yash Andure<br>
+            Ganesh Biradar<br>
+            Ganest Ghumare<br>
+        </p>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" accept=".txt" required>
+            <button type="submit">Upload</button>
+        </form>
+        <p id="status"></p><br>
+        <h1>Generate Certificates</h1>
+        <button id="generateBtn">Generate Certificates</button>
+        <p id="generationStatus"></p>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const form=document.getElementById("uploadForm");
+                const genBtn = document.getElementById("generateBtn");
+                var fileName = "";
+                var flag = false;
+                form.addEventListener("submit", async(e) => {
+                    e.preventDefault()
+
+                    const fileInput = document.getElementById("fileInput");
+                    const file = fileInput.files[0];
+                    fileName = file.name;
+                    const formData = new FormData();
+                    formData.append("file", file);
+
+                    const response = await fetch("/textUpload", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    const result = await response.json();
+                    if(result.status == "ok"){
+                        flag = true;
+                    }
+                    document.getElementById("status").innerText = result.message;
+                })
+                genBtn.addEventListener("click", async (e)=>{
+                    e.preventDefault();
+                    if(!flag){
+                        document.getElementById("generationStatus").innerText = "Please first enter the text file";
+                        return;
+                    }
+                    
+                    const response = await fetch("/generateCertificates", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            fileName: fileName
+                        })
+                    });
+
+                    const result = await response.json();
+                    document.getElementById("generationStatus").innerText = result.message + " " + result.stderr;
+
+                })            
+            })
+        </script>
+    </body>
+</html>

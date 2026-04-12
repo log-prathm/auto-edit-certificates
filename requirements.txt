@@ -1,0 +1,7 @@
+uvicorn
+python-multipart
+argparse
+pathlib
+fitz
+tools
+pydantic
