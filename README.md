@@ -9,7 +9,7 @@ This repo contains code for automatic certificate labeling - such as adding name
 ## For pdf template =>
 
 `
-python make_certificates.py \
+python main.py \
   --template certificate.pdf \
   --names names.csv \
   --names-column name \
