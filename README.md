@@ -5,14 +5,6 @@ This repo contains code for automatic certificate labeling - such as adding name
 ---
 
 
-# Run via app.py =>
-`uvicorn app:app --reload`
-
-### Starting uvicorn ->
-`uvicorn <filename_without_.py>:<FastAPI_instance>`
-
-# Run directly
-
 ## For pdf template =>
 
 `
